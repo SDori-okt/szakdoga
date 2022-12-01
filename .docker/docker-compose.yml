@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+    laravel:
+        image: laravel/laravel
+        container_name: laravel
+        build: .
+        ports:
+            - "22222:80"
+        volumes:
+            - ../:/var/www
+        depends_on:
+          - laravel-mysql
+
+    laravel-mysql:
+        image: mariadb:10.9
+        #image: mysql:8.0.27
+        container_name: laravel-mysql
+        restart: unless-stopped
+        ports:
+          - "3306:3306"
+        expose:
+          - 3306
+        environment:
+          MYSQL_ROOT_PASSWORD: a
+        volumes:
+          - mysql:/var/lib/mysql
+
+    laravel-adminer:
+        image: adminer
+        container_name: laravel-adminer
+        restart: unless-stopped
+        ports:
+          - "22223:8080"
+        environment:
+          - ADMINER_DESIGN=lucas-sandery
+          - ADMINER_DEFAULT_SERVER=laravel-mysql
+        depends_on:
+          - laravel-mysql
+
+volumes:
+  mysql:
+    driver: local
