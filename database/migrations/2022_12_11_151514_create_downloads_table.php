@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('downloads', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->timestamp('last_login');
-            $table->integer('point');
-            $table->string('edu_id')->unique();
+            $table->index('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->index('file_id');
+            $table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('downloads');
     }
 };
