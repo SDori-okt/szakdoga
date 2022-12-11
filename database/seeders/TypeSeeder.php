@@ -15,17 +15,17 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('types')->insert([
             'name' => 'röpdolgozat',
             'point_up' => 15,
             'point_down' => 3,
         ]);
-        DB::table('users')->insert([
+        DB::table('types')->insert([
             'name' => 'dolgozat/témazáró',
             'point_up' => 25,
             'point_down' => 5,
         ]);
-        DB::table('users')->insert([
+        DB::table('types')->insert([
             'name' => 'próbaérettségi',
             'point_up' => 40,
             'point_down' => 8,
