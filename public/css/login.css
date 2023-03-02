@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    margin:0;
+    font-family: 'Roboto Condensed Light', sans-serif;
+    background-image: url("../images/back.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.loginfield{
+    border:none;
+    border-bottom: 1px silver solid;
+    color:#252525;
+    width:80%;
+    transition: width 1s;
+}
+
+.loginfield:focus{
+    outline: none;
+    width: 100%;
+    transition: width 1s;
+}
+
+.enter{
+    transition: 1s;
+}
+
+.enter:hover{
+    transform: scale(1.1);
+    transition: 1s;
+}

@@ -21,32 +21,27 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-<div class="hero min-h-screen bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse">
-        <div class="text-center lg:text-left flex-col">
-            <img class="text-center" src="images/logo.svg" alt="ShareOn" title="ShareOn">
-            <h1 class="text-5xl font-bold">Login now!</h1>
-            <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+<div class="hero min-h-screen backdrop-blur-3xl text-white">
+    <div class="hero-content sm:flex-col flex-row w-full justify-content-around">
+        <div class="text-center lg:text-left flex-col flex-3">
+            <img class="mx-auto" src="images/logo.svg" alt="ShareOn" title="ShareOn">
+            <h2 class="text-3xl mt-3 font-bold">Üdvözöllek az oldalon!</h2>
+            <p class="py-6">Ha még nincs saját profilod, kérlek regisztrálj! <br>Ne maradj a számos érdekes és hasznos dologról, ami bent vár!</p>
         </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div class="card-body">
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Email</span>
-                    </label>
-                    <input type="text" placeholder="email" class="input input-bordered" />
+        <div class="card flex-shrink-0 w-full max-w-sm shadow-1xl bg-base-100 flex-1">
+            <div class="card-body text-center gap-3">
+                <div class="w-full">
+                    <input type="text" placeholder="E-mail" class="loginfield" />
                 </div>
-                <div class="form-control">
+                <div class="w-full">
+                    <input type="text" placeholder="Jelszó" class="loginfield" />
                     <label class="label">
-                        <span class="label-text">Password</span>
-                    </label>
-                    <input type="text" placeholder="password" class="input input-bordered" />
-                    <label class="label">
-                        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+
                     </label>
                 </div>
-                <div class="form-control mt-6">
-                    <button class="btn btn-primary">Login</button>
+                <p class="w-full text-center"><a href="#" class="label-text-alt link link-hover">Elfelejtetted a jelszót?</a></p>
+                <div class="w-full mt-3">
+                    <button class="btn btn-info enter">Belépés</button>
                 </div>
             </div>
         </div>
