@@ -3,7 +3,7 @@
 <head>
     <title>Belépés</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="idth=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -13,15 +13,18 @@
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+    <!-- Tailwind.CSS -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <div class="hero min-h-screen bg-base-200">
     <div class="hero-content flex-col lg:flex-row-reverse">
-        <div class="text-center lg:text-left">
-            <img src="../images/logo.svg" alt="ShareOn" title="ShareOn">
+        <div class="text-center lg:text-left flex-col">
+            <img class="text-center" src="images/logo.svg" alt="ShareOn" title="ShareOn">
             <h1 class="text-5xl font-bold">Login now!</h1>
             <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
         </div>
