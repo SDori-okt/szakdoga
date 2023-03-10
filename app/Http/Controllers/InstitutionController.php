@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class InstitutionController extends Controller
 {
-    public function getInstitutions()
+    public static function getInstitutions()
     {
         $apiURL = 'https://kretaglobalmobileapi2.ekreta.hu/api/v3/Institute';
         $headers = [
