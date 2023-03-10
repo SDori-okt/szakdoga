@@ -16,6 +16,10 @@ class InstitutionController extends Controller
         $response = Http::withHeaders($headers)->get($apiURL);
         $response = json_decode($response, true);
 
+        usort($response, function ($a, $b) {
+            return strcmp(trim($a['name']), trim($b['name']));
+        });
+
         return $response;
     }
 }
