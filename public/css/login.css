@@ -25,6 +25,10 @@ body{
     transition: width 1s;
 }
 
+::placeholder, select{
+    color: gray;
+}
+
 .enter{
     transition: 1s;
 }

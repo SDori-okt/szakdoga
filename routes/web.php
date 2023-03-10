@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return view('test')->with('institution');
 });
 
-Route::get("institution", [InstitutionController::class, "getInstitutions"]);
+Route::get("institution", [InstitutionController::class, "getInstitutions"])->name('institution');
