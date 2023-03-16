@@ -9,6 +9,6 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     $institution = InstitutionController::getInstitutions();
-    dd($institution);
+    //dd($institution);
     return view('test')->with('institution', $institution);
 });

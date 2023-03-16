@@ -19,6 +19,10 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+
+    <!--Custom JS -->
+    <script src="js/filter.js"></script>
 </head>
 <body>
 <div class="hero min-h-screen backdrop-blur-3xl text-white">
@@ -26,7 +30,7 @@
         <div class="text-center lg:text-left flex-col flex-3">
             <img class="mx-auto" src="images/logo.svg" alt="ShareOn" title="ShareOn">
             <h2 class="text-3xl mt-3 font-bold">Üdvözöllek az oldalon!</h2>
-            <p class="py-6">Ha még nincs saját profilod, kérlek regisztrálj! <br>Ne maradj a számos érdekes és hasznos dologról, ami bent vár!</p>
+            <p class="py-6">Ne maradj a számos érdekes és hasznos dologról, ami bent vár!</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-1xl bg-base-100 flex-1">
             <div class="card-body text-center gap-3 text-gray-800">
@@ -36,15 +40,15 @@
                 <div class="w-full">
                     <input type="text" placeholder="Jelszó" class="loginfield" />
                 </div>
-                <div class="w-full">
-                    <select id="institute" class="loginfield">
-                        <option value="" disabled selected>Iskola</option>
+                <div class="dropdown w-full">
+                    <button onclick="institutionList()" class="dropbtn">Intézmény</button>
+                    <div id="institutionList" class="dropdown-content">
+                        <input type="text" placeholder="Keresés.." id="input" onkeyup="filterFunction()">
                         @foreach($institution as $i)
-                            <option value="{{$i['instituteCode']}}" >{{$i['name']}}</option>
+                            <a href="#">{{$i['name']}}</a>
                         @endforeach
-                    </select>
+                    </div>
                 </div>
-
                 <p class="w-full text-center"><a href="#" class="label-text-alt link link-hover">Elfelejtetted a jelszót?</a></p>
                 <div class="w-full mt-3">
                     <button class="btn btn-info enter">Belépés</button>
