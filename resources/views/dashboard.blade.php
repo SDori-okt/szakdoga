@@ -15,15 +15,18 @@
     <!-- Tailwind-->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 <!-- Menu -->
-@include("menu");
+@include("menu")
 
 
 <!-- Dashboard tile -->
 <div class="container w-50">
-    <h2 class="fs-1 pb-3">Statisztikád</h2>
+    <h2 class="fs-1 pb-3 pt-5">Statisztikád</h2>
     <div class="container p-0 d-md-flex gap-10 justify-content-between">
         <div class="w-50 shadow-md p-5 rounded-3 bg-danger d-flex flex-column align-items-center justify-content-center">
             <h2>Letöltések</h2>
@@ -75,15 +78,15 @@
     </table>
 
     <div class="container d-flex gap-10 justify-content-center align-items-center">
-        <span class="p-3 fa fa-arrow-left rounded-2 bg-info text-light"></span>
+        <span class="p-3 fa fa-arrow-left rounded-2 bg-info text-light pagination"></span>
         <span class="fs-4">1</span>
-        <span class="p-3 fa fa-arrow-right rounded-2 bg-info text-light"></span>
+        <span class="p-3 fa fa-arrow-right rounded-2 bg-info text-light pagination"></span>
     </div>
 
 </div>
 
 
 <!-- Footer -->
-
+@include("footer")
 </body>
 </html>

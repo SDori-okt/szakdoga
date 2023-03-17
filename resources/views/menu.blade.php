@@ -1,15 +1,13 @@
 <!-- Navigation -->
-<div class="container-fluid bg-light shadow-md">
+<div class="container-fluid shadow-md menu">
     <nav class="navbar navbar-expand-md d-flex">
         <div class="container flex-1">
-            <a class="navbar-brand" href="#"><img src="../images/logo.svg" alt="ShareOn logo"></a>
+            <a class="navbar-brand text-danger" href="#"><img class="w-25" src="../images/logo.svg" alt="ShareOn logo"></a>
             <!-- Hambi menü -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-
-
 
         <!-- Menüpontok -->
         <div class="collapse navbar-collapse flex-4" id="navbarScroll">

@@ -17,5 +17,9 @@ Route::get('/home', function () {
     return view('dashboard');
 });
 
+Route::get('/upload', function () {
+    return view('upload');
+});
+
 
 
