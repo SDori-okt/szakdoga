@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InstitutionController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,7 @@ Route::get('/upload', function () {
     return view('upload');
 });
 
-
-
+Route::get('/authTest', function(){
+    dd(AuthController::getNonce());
+    return;
+});
