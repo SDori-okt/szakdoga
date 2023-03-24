@@ -4,7 +4,7 @@
             <img src="images/logo.svg" alt="ShareOn" class="w-24">
             <p class="w-100">Keress, találj, értékelj, alkoss és ossz meg! Együtt könyebb!<br>Ne többet dolgozz, hanem okosabban!</p>
         </div>
-        <div class="col-sm-3">
+        <div>
             <span class="footer-title">Oldaltérkép</span>
             <div class="grid grid-flow-col gap-4">
                 <ul>
@@ -14,7 +14,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div>
             <span class="footer-title">Dokumentumok</span>
             <div class="grid grid-flow-col gap-4">
                 <ul>
@@ -24,7 +24,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div>
             <span class="footer-title">Social</span>
             <div class="grid grid-flow-col gap-4">
                 <span class="fa fa-facebook"></span>
