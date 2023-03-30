@@ -23,6 +23,5 @@ Route::get('/upload', function () {
 });
 
 Route::get('/authTest', function(){
-    dd(AuthController::getNonce());
-    return;
+    return AuthController::isTeacher('Vinnai Zsolt', '012345678', 'gyszc-bolyai');
 });
