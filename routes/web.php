@@ -21,5 +21,8 @@ Route::get('/upload', function () {
     return view('upload');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
 
 
