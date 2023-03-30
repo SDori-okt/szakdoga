@@ -52,4 +52,24 @@ class AuthController extends Controller
             return $response;
         }
     }
+
+    public static function isTeacher($username, $password, $institution)
+    {
+        $bearer = self::getToken($username, $password, $institution);
+        $url = 'https://' . $institution . '.e-kreta.hu/dktapi/felhasznalo?szerepkorok=true';
+        $headers = [
+            'Authorization' => 'Bearer ' . $bearer,
+        ];
+
+        $response = Http::withHeaders($headers)->get($url);
+        $response = json_decode($response, true);
+
+        $roles = $response['szerepkorok'];
+
+        if (in_array('Tanar', $roles)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
