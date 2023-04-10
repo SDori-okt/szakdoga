@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,4 +20,8 @@ Route::get('/upload', function () {
 
 Route::get('/authTest', function(){
     return AuthController::isTeacher('Vinnai Zsolt', '012345678', 'gyszc-bolyai');
+});
+
+Route::get('/userTest', function(){
+    return UserController::getUser('Vinnai Zsolt', '012345678', 'gyszc-bolyai');
 });
