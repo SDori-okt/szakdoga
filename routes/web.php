@@ -25,4 +25,5 @@ Route::get('/search', function () {
     return view('search');
 });
 
+Route::post('/upload', 'App\Http\Controllers\FileController@store')->name('files.store');
 
