@@ -58,7 +58,9 @@
                     </p>
                 </div>
                 <input id="dropzone-file" type="file" class="hidden"
-                       accept="images/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"/>
+                       accept="images/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                       name="file"
+                />
             </label>
         </div>
 

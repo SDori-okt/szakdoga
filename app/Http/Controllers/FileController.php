@@ -33,6 +33,7 @@ class FileController extends Controller
         $file->topic = $request->input('topic');
         $file->time = $request->input('time');
         $file->difficulty_level = $request->input('difficulty_level');
+        $file->type = "röpdolgozat";
         $file->num_of_downloads = 0;
         $file->save();
 
