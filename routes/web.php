@@ -19,9 +19,9 @@ Route::get('/upload', function () {
 });
 
 Route::get('/authTest', function(){
-    return AuthController::isTeacher('Vinnai Zsolt', '012345678', 'gyszc-bolyai');
+    return AuthController::isTeacher('Stencinger Dora', '', 'gyszc-bolyai');
 });
 
 Route::get('/userTest', function(){
-    return UserController::getUser('Vinnai Zsolt', '012345678', 'gyszc-bolyai');
+    return UserController::getUser('Stencinger Dora', '', 'gyszc-bolyai');
 });
