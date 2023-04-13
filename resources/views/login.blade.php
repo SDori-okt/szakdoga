@@ -33,7 +33,7 @@
         <div class="text-center lg:text-left flex-col flex-3">
             <img class="mx-auto" src="images/logo.svg" alt="ShareOn" title="ShareOn">
             <h2 class="text-3xl mt-3 font-bold">Üdvözöllek az oldalon!</h2>
-            <p class="py-6">Ne maradj a számos érdekes és hasznos dologról, ami bent vár!</p>
+            <p class="py-6">Ne maradj le a számos érdekes és hasznos dologról, ami bent vár!</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-1xl bg-base-100 flex-1">
             <div class="card-body text-center gap-3 text-gray-800">
@@ -48,7 +48,8 @@
                     <div id="institutionList" class="dropdown-content">
                         <input type="text" placeholder="Keresés.." id="input" onkeyup="filterFunction()">
                         @foreach($institution as $i)
-                            <div class="option" onmouseover="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
+                            <div class="option"
+                                 onmouseover="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
                                 {{$i['name']}}
                             </div>
                         @endforeach
