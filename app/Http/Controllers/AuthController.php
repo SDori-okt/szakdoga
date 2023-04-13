@@ -53,7 +53,7 @@ class AuthController extends Controller
         }
     }
 
-    public static function isTeacher($username, $password, $institution)
+    public static function isTeacher($username, $password, $institution): bool
     {
         $bearer = self::getToken($username, $password, $institution);
         $url = 'https://' . $institution . '.e-kreta.hu/dktapi/felhasznalo?szerepkorok=true';
@@ -66,10 +66,6 @@ class AuthController extends Controller
 
         $roles = $response['szerepkorok'];
 
-        if (in_array('Tanar', $roles)) {
-            return true;
-        } else {
-            return false;
-        }
+        return in_array('Tanar', $roles);
     }
 }
