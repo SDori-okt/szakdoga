@@ -35,14 +35,15 @@ class FileController extends Controller
         $file->title = $request->input('title');
         $file->subject = $request->input('subject');
         $file->topic = $request->input('topic');
-        $file->time = $request->input('time');
         $file->difficulty_level = $request->input('difficulty_level');
         $file->type = "röpdolgozat";
+        $file->time = 5;
         $file->num_of_downloads = 0;
+        $file->user_id = 2;
 
         $file->save();
 
-        return redirect()->route('dashboard')->with('success', 'Fájl feltöltése sikeres.');
+        return redirect()->route('home')->with('success', 'Fájl feltöltése sikeres.');
     }
 
     public function destroy(File $file): RedirectResponse
