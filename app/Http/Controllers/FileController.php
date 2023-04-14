@@ -8,6 +8,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\File;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -48,5 +50,19 @@ class FileController extends Controller
         $file->delete();
 
         return redirect()->route('dashboard')->with('success', 'Fájl törlése sikeres.');
+    }
+
+    public function downloadFile($filename): Response
+    {
+        if (!Storage::disk('public')->exists($filename)) {
+            abort(404);
+        }
+
+        $file = Storage::disk('public')->get($filename);
+        $response = new Response($file, 200);
+        $response->header('Content-Type', Storage::disk('public')->mimeType($filename));
+        $response->header('Content-Disposition', 'attachment; filename="'.$filename.'"');
+
+        return $response;
     }
 }
