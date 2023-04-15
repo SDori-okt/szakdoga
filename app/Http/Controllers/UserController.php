@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
-    public static function getUser($username, $password, $institution): User
+    public static function getUser($username, $password, $institution): ?User
     {
         $bearer = AuthController::getToken($username, $password, $institution);
         $url = 'https://' . $institution . '.e-kreta.hu/dktapi/felhasznalo?szerepkorok=true';
@@ -18,19 +18,26 @@ class UserController extends Controller
         $response = Http::withHeaders($headers)->get($url);
         $response = json_decode($response, true);
 
-        $user = User::firstOrNew([
-            'edu_id' => $response['oktatasiAzonosito'],
-            'email' => $response['emailCim'],
-            'full_name' => $response['nev'],
-        ]);
+        $roles = $response['szerepkorok'];
 
-        $user->last_login = now();
+        if (in_array('Tanar', $roles)) {
 
-        if ($user->point === null) {
-            $user->point = 10;
+            $user = User::firstOrNew([
+                'edu_id' => $response['oktatasiAzonosito'],
+            ]);
+
+            $user->email = $response['emailCim'];
+            $user->full_name = $response['nev'];
+            $user->last_login = now();
+
+            if ($user->point === null) {
+                $user->point = 10;
+            }
+            $user->save();
+
+            return $user;
         }
-        $user->save();
 
-        return $user;
+        return null;
     }
 }
