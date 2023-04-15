@@ -15,7 +15,7 @@ Route::get('/test', function () {
 
 Route::get('/home', function () {
     return view('dashboard');
-});
+})->name('home');
 
 Route::get('/upload', function () {
     $types = TypeController::getAllTypes();

@@ -22,11 +22,9 @@ class FileController extends Controller
     {
         $file = new File;
 
-        /*
         $request->validate([
             'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:1024'
         ]);
-        */
 
         $fileName = time() . '_' . $request->file('file')->getClientOriginalName();
         $request->file('file')->storeAs('public/files', $fileName);
