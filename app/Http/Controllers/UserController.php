@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -34,6 +35,7 @@ class UserController extends Controller
                 $user->point = 10;
             }
             $user->save();
+            Session::put('active_user', $user);
 
             return $user;
         }
