@@ -22,6 +22,7 @@ Route::get('/upload', function () {
 Route::get('/authTest', function(){
     return AuthController::isTeacher('Stencinger Dora', '', 'gyszc-bolyai');
 });
+
 Route::get('/search', function () {
     return view('search');
 });
@@ -29,5 +30,6 @@ Route::get('/search', function () {
 Route::get('/userTest', function(){
     return UserController::getUser('Stencinger Dora', '', 'gyszc-bolyai');
 });
+
 Route::post('/upload', 'App\Http\Controllers\FileController@store')->name('files.store');
 
