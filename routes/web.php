@@ -6,31 +6,25 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/login', function () {
     $institution = InstitutionController::getInstitutions();
     return view('login')->with('institution', $institution);
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('dashboard');
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::get('/upload', function () {
     $types = TypeController::getAllTypes();
     return view('upload')->with('types', $types);
-});
-
-Route::get('/authTest', function () {
-    return AuthController::isTeacher('Stencinger Dora', '', 'gyszc-bolyai');
-});
+})->middleware('auth');
 
 Route::get('/search', function () {
     return view('search');
-});
+})->middleware('auth');
 
-Route::get('/userTest', function () {
-    return UserController::getUser('Stencinger Dora', '', 'gyszc-bolyai');
-});
-
-Route::post('/upload', 'App\Http\Controllers\FileController@store')->name('files.store');
+Route::post('/upload', 'App\Http\Controllers\FileController@store')
+    ->name('files.store')
+    ->middleware('auth');
 
