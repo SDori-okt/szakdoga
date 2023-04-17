@@ -1,0 +1,26 @@
+
+body{
+    margin:0;
+    font-family: "Roboto Light", sans-serif;
+    background-image: url("../images/back2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.menu{
+    background: rgb(0,47,112);
+    background: linear-gradient(45deg, rgba(0,47,112,1) 0%, rgba(0,117,255,1) 52%, rgba(0,255,226,1) 100%);
+}
+
+a.nav-link.active{
+    background: transparent;
+}
+
+.pagination{
+    transition: 0.5s;
+}
+
+.pagination:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}

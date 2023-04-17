@@ -1,22 +1,31 @@
 <?php
 
+use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/login', function () {
+    $institution = InstitutionController::getInstitutions();
+    return view('login')->with('institution', $institution);
+});
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->name('home')->middleware('auth');
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/upload', function () {
+    $types = TypeController::getAllTypes();
+    return view('upload')->with('types', $types);
+})->middleware('auth');
+
+Route::get('/search', function () {
+    return view('search');
+})->middleware('auth');
+
+Route::post('/upload', 'App\Http\Controllers\FileController@store')
+    ->name('files.store')
+    ->middleware('auth');
+
+Route::post('/login', 'App\Http\Controllers\UserController@loginRequest')
+    ->name('login');
+
