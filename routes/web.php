@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,17 +10,21 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     $institution = InstitutionController::getInstitutions();
-    //dd($institution);
     return view('test')->with('institution', $institution);
 });
 
 Route::get('/home', function () {
     return view('dashboard');
-});
+})->name('home');
 
 Route::get('/upload', function () {
-    return view('upload');
+    $types = TypeController::getAllTypes();
+    return view('upload')->with('types', $types);
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
 
+Route::post('/upload', 'App\Http\Controllers\FileController@store')->name('files.store');
 
