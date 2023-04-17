@@ -48,7 +48,8 @@
                     <div id="institutionList" class="dropdown-content">
                         <input type="text" placeholder="Keresés.." id="input" onkeyup="filterFunction()">
                         @foreach($institution as $i)
-                            <div class="option" onclick="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
+                            <div class="option"
+                                 onmouseover="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
                                 {{$i['name']}}
                             </div>
                         @endforeach

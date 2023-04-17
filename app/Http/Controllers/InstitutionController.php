@@ -14,6 +14,7 @@ class InstitutionController extends Controller
         ];
 
         $response = Http::withHeaders($headers)->get($apiURL);
+        str_replace('\r\n', '', $response);
         $response = json_decode($response, true);
 
         usort($response, function ($a, $b) {
