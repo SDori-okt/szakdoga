@@ -26,3 +26,6 @@ Route::post('/upload', 'App\Http\Controllers\FileController@store')
     ->name('files.store')
     ->middleware('auth');
 
+Route::post('/login', 'App\Http\Controllers\UserController@loginRequest')
+    ->name('login');
+

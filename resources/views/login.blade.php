@@ -36,31 +36,62 @@
             <p class="py-6">Ne maradj le a számos érdekes és hasznos dologról, ami bent vár!</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-1xl bg-base-100 flex-1">
-            <div class="card-body text-center gap-3 text-gray-800">
-                <div class="w-full">
-                    <input type="text" placeholder="Felhasználónév" class="loginfield" id=""/>
-                </div>
-                <div class="w-full">
-                    <input type="text" placeholder="Jelszó" class="loginfield"/>
-                </div>
-                <div class="dropdown w-full">
-                    <button onclick="institutionList()" class="dropbtn btn" id="institute">Intézmény</button>
-                    <div id="institutionList" class="dropdown-content">
-                        <input type="text" placeholder="Keresés.." id="input" onkeyup="filterFunction()">
-                        @foreach($institution as $i)
-                            <div class="option"
-                                 onmouseover="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
-                                {{$i['name']}}
-                            </div>
-                        @endforeach
+            <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body text-center gap-3 text-gray-800">
+                    <div class="w-full">
+                        <input
+                            type="text"
+                            placeholder="Felhasználónév"
+                            class="loginfield"
+                            id="username"
+                            name="username"
+                        />
+                    </div>
+                    <div class="w-full">
+                        <input
+                            type="password"
+                            placeholder="Jelszó"
+                            class="loginfield"
+                            id="password"
+                            name="password"
+                        />
+                    </div>
+                    <div class="dropdown w-full">
+                        <button
+                            onclick="institutionList()"
+                            class="dropbtn btn"
+                            id="institute"
+                            type="button">
+                            Intézmény
+                        </button>
+                        <div id="institutionList" class="dropdown-content">
+                            <input
+                                type="text"
+                                placeholder="Keresés..."
+                                id="input"
+                                onkeyup="filterFunction()">
+                            @foreach($institution as $i)
+                                <div class="option"
+                                     onmouseover="selectInstitution('{{$i['name']}}', '{{$i['instituteCode']}}')">
+                                    {{$i['name']}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <input
+                            hidden
+                            type="text"
+                            id="institution"
+                            name="institution"
+                        >
+                    </div>
+                    <p class="w-full text-center"><a href="#" class="label-text-alt link link-hover">Elfelejtetted a
+                            jelszót?</a></p>
+                    <div class="w-full mt-3">
+                        <button type="submit" class="btn btn-info enter">Belépés</button>
                     </div>
                 </div>
-                <p class="w-full text-center"><a href="#" class="label-text-alt link link-hover">Elfelejtetted a
-                        jelszót?</a></p>
-                <div class="w-full mt-3">
-                    <button class="btn btn-info enter">Belépés</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

@@ -20,4 +20,5 @@ function filterFunction() {
 
 function selectInstitution(name, code) {
     document.getElementById("institute").innerHTML = name;
+    document.getElementById("institution").value = code;
 }

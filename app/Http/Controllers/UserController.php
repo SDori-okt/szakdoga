@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\StringHelper;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Prologue\Alerts\Facades\Alert;
 
 class UserController extends Controller
 {
-    public static function getUser($username, $password, $institution): ?User
+    public static function loginRequest()
+    {
+        $username = StringHelper::removeAccents(request()->username);
+        $password = request()->password;
+        $institution = request()->institution;
+        return self::getUser($username, $password, $institution);
+    }
+
+    public static function getUser($username, $password, $institution)
     {
         $bearer = AuthController::getToken($username, $password, $institution);
         $url = 'https://' . $institution . '.e-kreta.hu/dktapi/felhasznalo?szerepkorok=true';
@@ -37,9 +47,10 @@ class UserController extends Controller
             $user->save();
             Session::put('active_user', $user);
 
-            return $user;
+            return redirect()->route('home')->with('success', 'Sikeres bejelentkezés!');
         }
+        Alert::error('Sikertelen bejelentkezés!');
 
-        return null;
+        return redirect()->route('login')->with('error', 'Sikertelen bejelentkezés!');
     }
 }
