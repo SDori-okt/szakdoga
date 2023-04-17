@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,7 @@ Route::get('/upload', function () {
     return view('upload')->with('types', $types);
 });
 
-Route::get('/authTest', function(){
+Route::get('/authTest', function () {
     return AuthController::isTeacher('Stencinger Dora', '', 'gyszc-bolyai');
 });
 
@@ -27,7 +28,7 @@ Route::get('/search', function () {
     return view('search');
 });
 
-Route::get('/userTest', function(){
+Route::get('/userTest', function () {
     return UserController::getUser('Stencinger Dora', '', 'gyszc-bolyai');
 });
 
