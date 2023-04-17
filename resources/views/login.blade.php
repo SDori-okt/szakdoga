@@ -62,6 +62,7 @@
                             onclick="institutionList()"
                             class="dropbtn btn"
                             id="institute"
+                            style="background-color: #008808"
                             type="button">
                             Intézmény
                         </button>
@@ -99,8 +100,11 @@
     <div class="footer p-10">
         <div class="grid-cols-1">
             <img src="images/logo.svg" alt="ShareOn" class="w-24">
-            <p class="w-100">Keress, találj, értékelj, alkoss és ossz meg! Együtt könyebb!<br>Ne többet dolgozz, hanem
-                okosabban!</p>
+            <p class="w-100">
+                Keress, találj, értékelj, alkoss és ossz meg! Együtt könyebb!
+                <br>
+                Ne többet dolgozz, hanem okosabban!
+            </p>
         </div>
         <div class="col-sm-3">
             <span class="footer-title">Oldaltérkép</span>
