@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse flex-4" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll w-100 d-flex justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url('/home') }}">Kezdőlap</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Kezdőlap</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ url('/profil') }}">Profil</a>

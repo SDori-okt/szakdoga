@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\File;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Prologue\Alerts\Facades\Alert;
@@ -83,5 +84,10 @@ class FileController extends Controller
         $response->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
 
         return $response;
+    }
+
+    public static function getMyFiles($id): Collection
+    {
+        return File::query()->where("id", "=", $id)->get();
     }
 }
