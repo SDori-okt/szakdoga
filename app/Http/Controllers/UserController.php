@@ -49,7 +49,6 @@ class UserController extends Controller
 
             return redirect()->route('home')->with('success', 'Sikeres bejelentkezés!');
         }
-        Alert::error('Sikertelen bejelentkezés!');
 
         return redirect()->route('login')->with('error', 'Sikertelen bejelentkezés!');
     }

@@ -45,11 +45,9 @@ class FileController extends Controller
             $file->user_id = 2;
 
             $file->save();
-            Alert::success('Fájl feltöltése sikeres.');
 
             return redirect()->route('home')->with('success', 'Fájl feltöltése sikeres.');
         } catch (Exception $e) {
-            Alert::error('Fájl feltöltése sikertelen.');
             Log::debug($e);
 
             return redirect()->route('home')->with('error', 'Fájl feltöltése sikertelen.');
@@ -60,11 +58,9 @@ class FileController extends Controller
     {
         try {
             $file->delete();
-            Alert::success('Fájl törlése sikeres.');
 
             return redirect()->route('dashboard')->with('success', 'Fájl törlése sikeres.');
         } catch (Exception $e) {
-            Alert::error('Fájl törlése sikertelen.');
             Log::debug($e);
 
             return redirect()->route('home')->with('error', 'Fájl törlése sikertelen.');
