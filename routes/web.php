@@ -12,7 +12,7 @@ Route::get('/login', function () {
 
 Route::get('/', function () {
     $myfiles = FileController::getMyFiles(session()->get('active_user')->id);
-    return view('dashboard')->with('myfiles',$myfiles);
+    return view('dashboard')->with('myfiles', $myfiles);
 })->name('home')->middleware('auth');
 
 
@@ -31,4 +31,9 @@ Route::post('/upload', 'App\Http\Controllers\FileController@store')
 
 Route::post('/login', 'App\Http\Controllers\UserController@loginRequest')
     ->name('login');
+
+Route::get('/logout', function () {
+    session()->forget('active_user');
+    return redirect('/login');
+})->name('logout');
 
