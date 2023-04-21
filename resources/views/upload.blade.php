@@ -20,7 +20,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Custom -->
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/upload.css">
 </head>
 <body>
 <!-- Menu -->
