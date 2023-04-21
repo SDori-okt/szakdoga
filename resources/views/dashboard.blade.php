@@ -21,8 +21,8 @@
 </head>
 <body>
 <!-- Menu -->
-@include("menu")
-
+@include('menu')
+@include('alert')
 
 <!-- Dashboard tile -->
 <div class="container w-50">
