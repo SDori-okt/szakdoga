@@ -33,7 +33,7 @@ Route::post('/login', 'App\Http\Controllers\UserController@loginRequest')
     ->name('login');
 
 Route::get('/logout', function () {
-    session()->forget('active_user');
+    session()->flush();
     return redirect('/login');
 })->name('logout');
 
