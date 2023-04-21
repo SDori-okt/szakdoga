@@ -24,8 +24,8 @@
 </head>
 <body>
 <!-- Menu -->
-@include("menu")
-
+@include('menu')
+@include('alert')
 
 <!-- Upload -->
 <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
