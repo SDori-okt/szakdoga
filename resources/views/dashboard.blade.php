@@ -21,8 +21,8 @@
 </head>
 <body>
 <!-- Menu -->
-@include("menu")
-
+@include('menu')
+@include('alert')
 
 <!-- Dashboard tile -->
 <div class="container w-50">
@@ -54,25 +54,26 @@
                 <th>Fájlnév</th>
                 <th>Fájltípus</th>
                 <th>Szerző</th>
-                <th>Utolsó megtekintés</th>
+                <th>Feltöltve</th>
                 <th>Eszközök</th>
             </tr>
         </thead>
         <tbody>
 
-            @for($i = 0; $i < 30; $i++)
-            <tr>
-                <td class="text-center text-wrap">Mintafájl</td>
-                <td class="text-center">PDF</td>
-                <td class="text-center">Gipsz Jakab</td>
-                <td class="text-center">2023.03.16.</td>
-                <td class="text-center">
-                    <span class="fa fa-arrow-down text-danger" title="Letöltés"></span>
-                    <span class="fa fa-arrow-up text-success" title="Feltöltés"></span>
-                    <span class="fa fa-share text-info" title="Megosztás"></span>
-                </td>
-            </tr>
-            @endfor
+            @foreach($myfiles as $myfile)
+                <tr>
+                    <td class="text-center text-wrap">{{$myfile->file_name}}</td>
+                    <td class="text-center">{{$myfile->type}}</td>
+                    <td class="text-center">{{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}</td>
+                    <td class="text-center">{{$myfile->created_at}}</td>
+                    <td class="text-center">
+                        <span class="fa fa-arrow-down text-danger" title="Letöltés"></span>
+                        <span class="fa fa-arrow-up text-success" title="Feltöltés"></span>
+                        <span class="fa fa-share text-info" title="Megosztás"></span>
+                    </td>
+                </tr>
+            @endforeach
+
 
         </tbody>
     </table>

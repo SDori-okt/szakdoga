@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\File;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Prologue\Alerts\Facades\Alert;
@@ -44,11 +45,9 @@ class FileController extends Controller
             $file->user_id = 2;
 
             $file->save();
-            Alert::success('Fájl feltöltése sikeres.');
 
             return redirect()->route('home')->with('success', 'Fájl feltöltése sikeres.');
         } catch (Exception $e) {
-            Alert::error('Fájl feltöltése sikertelen.');
             Log::debug($e);
 
             return redirect()->route('home')->with('error', 'Fájl feltöltése sikertelen.');
@@ -59,11 +58,9 @@ class FileController extends Controller
     {
         try {
             $file->delete();
-            Alert::success('Fájl törlése sikeres.');
 
             return redirect()->route('dashboard')->with('success', 'Fájl törlése sikeres.');
         } catch (Exception $e) {
-            Alert::error('Fájl törlése sikertelen.');
             Log::debug($e);
 
             return redirect()->route('home')->with('error', 'Fájl törlése sikertelen.');
@@ -83,5 +80,10 @@ class FileController extends Controller
         $response->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
 
         return $response;
+    }
+
+    public static function getMyFiles($id): Collection
+    {
+        return File::query()->where("user_id", "=", $id)->get();
     }
 }

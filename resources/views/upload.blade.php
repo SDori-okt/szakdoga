@@ -24,22 +24,41 @@
 </head>
 <body>
 <!-- Menu -->
-@include("menu")
-
+@include('menu')
+@include('alert')
 
 <!-- Upload -->
 <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="container w-50 min-vh-100">
         <h2 class="fs-1 pt-5 pb-3">Saját fájl feltöltése</h2>
+        <p>Kérlek oszdd meg velünk, hogy mit kell tudnunk az általad feltöltésre kerülő fájlról!</p>
 
-        <input type="text" placeholder="Cím" name="title" id="title">
-        <input type="text" placeholder="Tantárgy" name="subject" id="subject">
-        <input type="text" placeholder="Témakör" name="topic" id="topic">
+        <div class="d-flex">
+            <label for="title">Cím:</label>
+            <input type="text" name="title" id="title" class="flex-fill border-bottom fel p-1">
+        </div>
 
-        <label>Nehézségi szint:
-            <input type="range" min="1" max="5" value="3" name="difficulty_level" id="difficulty_level">
-        </label>
+
+        <div class="d-flex">
+            <label for="subject">Tárgy:</label>
+            <input class="flex-fill border-bottom fel p-1" type="text" name="subject" id="subject">
+        </div>
+
+        <div class="d-flex">
+            <label for="topic">Témakör:</label>
+            <select name="topic" id="topic" class="flex-fill border-bottom fel p-1">
+                @foreach($types as $type)
+                    <option class="text-end w-100" value="{{$type->name}}">{{$type->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="d-flex">
+            <label for="difficulty_level">Nehézségi szint: </label>
+            <input class="flex-fill fel" type="range" min="1" max="5" value="3" name="difficulty_level" id="difficulty_level">
+        </div>
+
+
 
         <div class="flex items-center justify-center w-full">
             <label for="dropzone-file"

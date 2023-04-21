@@ -39,8 +39,8 @@
 </head>
 <body>
 <!-- Menu -->
-@include("menu")
-
+@include('menu')
+@include('alert')
 
 <!-- Upload -->
 <div class="container w-50 min-vh-100">
