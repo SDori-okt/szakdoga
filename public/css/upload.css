@@ -1,5 +1,8 @@
 @import url('home.css');
 .fel{
-    background-color: lightsteelblue;
-    border: 2px dotted green;
+    background-color: transparent;
+}
+
+.fel:focus{
+    outline:none;
 }

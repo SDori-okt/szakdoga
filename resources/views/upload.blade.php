@@ -46,7 +46,12 @@
         </div>
 
         <div class="d-flex">
-            <label for="topic">Témakör:</label>
+            <label for="subject">Témakör:</label>
+            <input class="flex-fill border-bottom fel p-1" type="text" name="topic" id="topic">
+        </div>
+
+        <div class="d-flex">
+            <label for="topic">Típus:</label>
             <select name="topic" id="topic" class="flex-fill border-bottom fel p-1">
                 @foreach($types as $type)
                     <option class="text-end w-100" value="{{$type->name}}">{{$type->name}}</option>
@@ -76,7 +81,7 @@
                         DOC, DOCX, XLS, XLSX, PPT, PPTX, képek vagy PDF tölhető fel!
                     </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden"
+                <input onchange="a()" id="dropzone-file" type="file" class="hidden"
                        accept="images/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                        name="file"
                 />
@@ -86,16 +91,26 @@
         <div>
             <div class="flex justify-content-between align-items-center pt-3 pb-3">
                 <div class="flex-1">
-                    <h2 class="fs-2">Feltöltendő fájlok</h2>
+                    <h2 class="fs-2">Feltöltendő fájl</h2>
                 </div>
                 <div class="flex-1 flex justify-content-end">
                     <button class="bg-sky-500 hover:bg-sky-600 text-white rounded-2 fw-bold p-2">Feltöltés</button>
                 </div>
             </div>
 
+            <script>
+                function a(){
+                    console.log(document.getElementById("dropzone-file").value);
+                    let file = document.getElementById("dropzone-file").value;
+
+                    document.getElementById("filename").innerHTML = file.substring(file.length-1,file.indexOf("\\"));
+                }
+
+            </script>
+
             <table class="table table-striped table-hover">
                 <tr>
-                    <td>demo.pdf</td>
+                    <td id="filename">demo.pdf</td>
                     <td class="text-right"><span class="fa fa-close hover:text-red-600"></span></td>
                 </tr>
             </table>
