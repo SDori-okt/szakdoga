@@ -88,6 +88,6 @@ class FileController extends Controller
 
     public static function getMyFiles($id): Collection
     {
-        return File::query()->where("id", "=", $id)->get();
+        return File::query()->where("user_id", "=", $id)->get();
     }
 }

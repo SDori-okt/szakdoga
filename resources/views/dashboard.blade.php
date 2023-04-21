@@ -54,7 +54,7 @@
                 <th>Fájlnév</th>
                 <th>Fájltípus</th>
                 <th>Szerző</th>
-                <th>Utolsó megtekintés</th>
+                <th>Feltöltve</th>
                 <th>Eszközök</th>
             </tr>
         </thead>
@@ -64,7 +64,7 @@
                 <tr>
                     <td class="text-center text-wrap">{{$myfile->file_name}}</td>
                     <td class="text-center">{{$myfile->type}}</td>
-                    <td class="text-center">{{\App\Models\User::query()->where('id','=', $myfile->user_id)->get()->name}}</td>
+                    <td class="text-center">{{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}</td>
                     <td class="text-center">{{$myfile->created_at}}</td>
                     <td class="text-center">
                         <span class="fa fa-arrow-down text-danger" title="Letöltés"></span>
