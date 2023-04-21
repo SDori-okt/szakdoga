@@ -30,5 +30,10 @@ class TypeSeeder extends Seeder
             'point_up' => 40,
             'point_down' => 8,
         ]);
+        DB::table('types')->insert([
+            'name' => 'gyakorló feladatsor',
+            'point_up' => 15,
+            'point_down' => 3,
+        ]);
     }
 }
