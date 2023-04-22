@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Type;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -39,12 +40,14 @@ class FileController extends Controller
             $file->subject = $request->input('subject');
             $file->topic = $request->input('topic');
             $file->difficulty_level = $request->input('difficulty_level');
-            $file->type = "röpdolgozat";
-            $file->time = 5;
+            $file->type = $request->input('type');
+            $file->time = $request->input('time');
             $file->num_of_downloads = 0;
-            $file->user_id = 2;
+            $file->user_id = session()->get('active_user')->id;
 
             $file->save();
+
+            self::addPoints($file->type);
 
             return redirect()->route('home')->with('success', 'Fájl feltöltése sikeres.');
         } catch (Exception $e) {
@@ -85,5 +88,13 @@ class FileController extends Controller
     public static function getMyFiles($id): Collection
     {
         return File::query()->where("user_id", "=", $id)->get();
+    }
+
+    public static function addPoints($type): void
+    {
+        $user = session()->get('active_user');
+        $point = Type::query()->where('name', '=', $type)->first()->point_up;
+        $user->point += $point;
+        $user->save();
     }
 }

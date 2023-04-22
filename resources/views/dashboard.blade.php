@@ -51,8 +51,8 @@
     <table class="table table-striped table-hover">
         <thead class="text-center">
             <tr>
-                <th>Fájlnév</th>
-                <th>Fájltípus</th>
+                <th>Cím</th>
+                <th>Típus</th>
                 <th>Szerző</th>
                 <th>Feltöltve</th>
                 <th>Eszközök</th>
@@ -62,10 +62,10 @@
 
             @foreach($myfiles as $myfile)
                 <tr>
-                    <td class="text-center text-wrap">{{$myfile->file_name}}</td>
+                    <td class="text-center text-wrap">{{$myfile->title}}</td>
                     <td class="text-center">{{$myfile->type}}</td>
                     <td class="text-center">{{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}</td>
-                    <td class="text-center">{{$myfile->created_at}}</td>
+                    <td class="text-center">{{$myfile->created_at->toDateString('Y-m-d')}}</td>
                     <td class="text-center">
                         <span class="fa fa-arrow-down text-danger" title="Letöltés"></span>
                         <span class="fa fa-arrow-up text-success" title="Feltöltés"></span>
