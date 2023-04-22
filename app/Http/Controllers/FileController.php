@@ -10,11 +10,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\File;
-use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Prologue\Alerts\Facades\Alert;
 
 class FileController extends Controller
 {
@@ -57,37 +55,37 @@ class FileController extends Controller
         }
     }
 
-    public function destroy(File $file): RedirectResponse
+    public function destroy($filename): RedirectResponse
     {
+        $file = File::query()->where('file_name', '=', $filename)->first();
         try {
-            $file->delete();
+            $file->deleted_at = now();
+            $file->save();
 
-            return redirect()->route('dashboard')->with('success', 'Fájl törlése sikeres.');
+            return redirect()->route('home')->with('success', 'Fájl törlése sikeres.');
         } catch (Exception $e) {
             Log::debug($e);
 
             return redirect()->route('home')->with('error', 'Fájl törlése sikertelen.');
         }
-
     }
 
-    public function downloadFile($filename): Response
+    public function downloadFile($filename)
     {
-        if (!Storage::disk('public')->exists($filename)) {
+        if (!Storage::exists('public/files/' . $filename)) {
             abort(404);
         }
 
-        $file = Storage::disk('public')->get($filename);
-        $response = new Response($file, 200);
-        $response->header('Content-Type', Storage::disk('public')->mimeType($filename));
-        $response->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+        $path = Storage::path('public/files/' . $filename);
 
-        return $response;
+        return response()->download($path, substr($filename, 11));
     }
 
     public static function getMyFiles($id): Collection
     {
-        return File::query()->where("user_id", "=", $id)->get();
+        return File::query()
+            ->where("user_id", "=", $id)
+            ->get();
     }
 
     public static function addPoints($type): void

@@ -37,3 +37,10 @@ Route::get('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
+Route::get('/download/{file_name}', 'App\Http\Controllers\FileController@downloadFile')
+    ->name('downloadFile')
+    ->middleware('auth');
+
+Route::get('/delete/{filename}', 'App\Http\Controllers\FileController@destroy')
+    ->name('deleteFile')
+    ->middleware('auth');
