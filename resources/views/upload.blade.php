@@ -19,8 +19,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom -->
-    <link rel="stylesheet" href="css/home.css">
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="css/upload.css">
+
+    <!--Custom JS -->
+    <script src="js/upload.js"></script>
 </head>
 <body>
 <!-- Menu -->
@@ -32,42 +35,63 @@
     @csrf
     <div class="container w-50 min-vh-100">
         <h2 class="fs-1 pt-5 pb-3">Saját fájl feltöltése</h2>
-        <p>Kérlek oszdd meg velünk, hogy mit kell tudnunk az általad feltöltésre kerülő fájlról!</p>
+        <p class="mb-3">Kérlek oszdd meg velünk, hogy mit kell tudnunk az általad feltöltésre kerülő fájlról!</p>
 
         <div class="d-flex">
-            <label for="title">Cím:</label>
-            <input type="text" name="title" id="title" class="flex-fill border-bottom fel p-1">
+            <label for="title">Feladatsor címe:</label>
+            <input type="text" name="title" id="title" class="flex-fill border-bottom fel mb-2 ml-2">
         </div>
 
 
         <div class="d-flex">
-            <label for="subject">Tárgy:</label>
-            <input class="flex-fill border-bottom fel p-1" type="text" name="subject" id="subject">
+            <label for="subject">Tantárgy:</label>
+            <input class="flex-fill border-bottom fel mb-2 ml-2" type="text" name="subject" id="subject">
         </div>
 
         <div class="d-flex">
-            <label for="topic">Témakör:</label>
-            <select name="topic" id="topic" class="flex-fill border-bottom fel p-1">
+            <label for="subject">Témakör:</label>
+            <input class="flex-fill border-bottom fel mb-2 ml-2" type="text" name="topic" id="topic">
+        </div>
+
+        <div class="d-flex">
+            <label for="type">Típus:</label>
+            <select name="type" id="type" class="flex-fill border-bottom fel mb-2 text-right">
                 @foreach($types as $type)
-                    <option class="text-end w-100" value="{{$type->name}}">{{$type->name}}</option>
+                    <option value="{{$type->name}}">{{$type->name}}</option>
                 @endforeach
             </select>
         </div>
+
         <div class="d-flex">
-            <label for="difficulty_level">Nehézségi szint: </label>
-            <input class="flex-fill fel" type="range" min="1" max="5" value="3" name="difficulty_level" id="difficulty_level">
+            <label for="time" class="form-label">Megoldásra szánt idő:</label>
+            <input type="time" name="time" id="time" value="15" class="flex-fill border-bottom fel mb-2 text-right">
         </div>
 
-
+        <div class="d-flex">
+            <label for="difficulty_level">Nehézségi szint (<span id="lvl">3</span>): </label>
+            <input
+                class="flex-fill fel mb-2"
+                type="range"
+                min="1"
+                max="5"
+                value="3"
+                name="difficulty_level"
+                id="difficulty_level"
+                onchange="showLvl()"
+            >
+        </div>
 
         <div class="flex items-center justify-center w-full">
             <label for="dropzone-file"
-                   class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                   class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300
+                   border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700
+                   hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                         <span class="font-semibold">Kattints a feltöltéshez</span> vagy húzd ide és engedd el!
@@ -76,7 +100,7 @@
                         DOC, DOCX, XLS, XLSX, PPT, PPTX, képek vagy PDF tölhető fel!
                     </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden"
+                <input onchange="showFileName()" id="dropzone-file" type="file" class="hidden"
                        accept="images/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                        name="file"
                 />
@@ -86,7 +110,7 @@
         <div>
             <div class="flex justify-content-between align-items-center pt-3 pb-3">
                 <div class="flex-1">
-                    <h2 class="fs-2">Feltöltendő fájlok</h2>
+                    <h2 class="fs-2">Feltöltendő fájl</h2>
                 </div>
                 <div class="flex-1 flex justify-content-end">
                     <button class="bg-sky-500 hover:bg-sky-600 text-white rounded-2 fw-bold p-2">Feltöltés</button>
@@ -95,7 +119,7 @@
 
             <table class="table table-striped table-hover">
                 <tr>
-                    <td>demo.pdf</td>
+                    <td id="filename">demo.pdf</td>
                     <td class="text-right"><span class="fa fa-close hover:text-red-600"></span></td>
                 </tr>
             </table>
