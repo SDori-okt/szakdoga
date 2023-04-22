@@ -50,10 +50,17 @@
     <!-- Kereső -->
     <div class="bg-white p-3 shadow-md">
         <p>Az alábbi űrlapmezők kitöltésével szűkítheted a keresésed.</p>
-        <form action="" class="d-flex flex-column justify-content-center gap-2">
+        <form action="{{ route('search') }}"
+              method="post"
+              class="d-flex flex-column justify-content-center gap-2"
+              enctype="multipart/form-data">
+            @csrf
             <input type="text" id="tema" class="w-100 p-3 rounded-0 border-bottom" placeholder="Téma">
             <input type="text" id="evfolyam" class="w-100 p-3 rounded-0 border-bottom" placeholder="Évfolyam">
-            <span class="border-bottom"><label for="nehezseg" class="w-25 text-center">Nehézségi szint</label><input type="number" min="1" max="3" id="nehezseg" class="w-75 p-3 rounded-0" name="nehezseg"></span>
+            <span class="border-bottom">
+                <label for="nehezseg" class="w-25 text-center">Nehézségi szint</label>
+                <input type="number" min="1" max="3" id="nehezseg" class="w-75 p-3 rounded-0" name="nehezseg">
+            </span>
             <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info">
         </form>
     </div>
