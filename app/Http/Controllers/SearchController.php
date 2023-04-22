@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SearchController extends Controller
 {
-    public static function search(): Collection|array
+    public static function search(): Collection
     {
         $request = request();
         dd($request);
