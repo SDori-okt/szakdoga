@@ -10,9 +10,13 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\File;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FileController extends Controller
 {
@@ -41,7 +45,7 @@ class FileController extends Controller
             $file->type = $request->input('type');
             $file->time = $request->input('time');
             $file->num_of_downloads = 0;
-            $file->user_id = session()->get('active_user')->id;
+            $file->user_id = user()->id;
 
             $file->save();
 
@@ -70,8 +74,23 @@ class FileController extends Controller
         }
     }
 
-    public function downloadFile($filename)
+    public function downloadFile($filename): BinaryFileResponse|Redirector|RedirectResponse|Application
     {
+        if (!user()) {
+            return redirect('login')->with('error', 'Bejelentkezés szükséges.');
+        }
+
+        $file = File::query()->where('file_name', '=', $filename)->first();
+        if ($file->user_id != user()->id) {
+            $type = Type::query()->where('name', '=', $file->type)->first();
+            if (user()->point < $type->point_down) {
+                return redirect('home')->with('error', 'Nincs elég pontja a letöltéshez.');
+            } else {
+                user()->point -= $type->point_down;
+                user()->save();
+            }
+        }
+
         if (!Storage::exists('public/files/' . $filename)) {
             abort(404);
         }
@@ -90,9 +109,10 @@ class FileController extends Controller
 
     public static function addPoints($type): void
     {
-        $user = session()->get('active_user');
+        $user = user();
         $point = Type::query()->where('name', '=', $type)->first()->point_up;
         $user->point += $point;
         $user->save();
     }
+
 }

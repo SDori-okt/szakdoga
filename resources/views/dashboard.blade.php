@@ -34,18 +34,20 @@
 <div class="container w-50">
     <h2 class="fs-1 pb-3 pt-5">Statisztikád</h2>
     <div class="container p-0 d-md-flex gap-10 justify-content-between">
-        <div
-            class="w-50 shadow-md p-5 rounded-3 bg-danger d-flex flex-column align-items-center justify-content-center">
+        <div class="w-50 shadow-md p-5 rounded-3 bg-danger d-flex flex-column
+            align-items-center justify-content-center">
             <h2>Letöltések</h2>
             <p class="fs-1 fw-bold">44</p>
         </div>
         <div
-            class="w-50 shadow-md p-5 rounded-3 bg-success d-flex flex-column align-items-center justify-content-center">
+            class="w-50 shadow-md p-5 rounded-3 bg-success d-flex flex-column
+                align-items-center justify-content-center">
             <h2>Feltöltések</h2>
             <p class="fs-1 fw-bold">44</p>
         </div>
         <div
-            class="w-50 shadow-md p-5 rounded-3 bg-warning d-flex flex-column align-items-center justify-content-center">
+            class="w-50 shadow-md p-5 rounded-3 bg-warning d-flex flex-column
+                align-items-center justify-content-center">
             <h2>Értékelés</h2>
             <p class="fs-1 fw-bold">4.4</p>
         </div>
@@ -70,10 +72,18 @@
 
         @foreach($myfiles as $myfile)
             <tr>
-                <td class="text-center text-wrap">{{$myfile->title}}</td>
-                <td class="text-center">{{$myfile->type}}</td>
-                <td class="text-center">{{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}</td>
-                <td class="text-center">{{$myfile->created_at->toDateString('Y-m-d')}}</td>
+                <td class="text-center text-wrap">
+                    {{$myfile->title}}
+                </td>
+                <td class="text-center">
+                    {{$myfile->type}}
+                </td>
+                <td class="text-center">
+                    {{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}
+                </td>
+                <td class="text-center">
+                    {{$myfile->created_at->toDateString('Y-m-d')}}
+                </td>
                 <td class="text-center">
                     <a href="{{ route('downloadFile', ['file_name' => $myfile->file_name]) }}">
                         <span
@@ -87,7 +97,10 @@
                             title="Törlés">
                         </span>
                     </a>
-                    <a href="#" onclick="copyToClipboard('{{ route('downloadFile', ['file_name' => $myfile->file_name]) }}')">
+                    <a
+                        href="#"
+                        onclick="copyToClipboard('{{ route('downloadFile', ['file_name' => $myfile->file_name]) }}')"
+                    >
                         <span
                             class="fa fa-share-alt text-info"
                             title="Megosztás">

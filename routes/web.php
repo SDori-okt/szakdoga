@@ -11,7 +11,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/', function () {
-    $myfiles = FileController::getMyFiles(session()->get('active_user')->id);
+    $myfiles = FileController::getMyFiles(user()->id);
     return view('dashboard')->with('myfiles', $myfiles);
 })->name('home')->middleware('auth');
 
