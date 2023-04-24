@@ -1,0 +1,15 @@
+@startuml
+
+actor Felhasználó as user
+participant ShareOn as site
+control "Kréta API" as kreta
+database Adatbázis as DB
+
+user->site: felhasználónév\njelszó\nintézmény
+site->kreta: autentikációs kérés
+kreta->kreta: feldolgozás
+kreta->site: autentikációs válasz
+site->DB: kapott informciók tárolása adatbázisban
+
+
+@enduml
