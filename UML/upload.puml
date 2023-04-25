@@ -1,0 +1,12 @@
+@startuml
+
+actor Felhasználó as user
+participant ShareOn as site
+database Adatbázis as DB
+
+user->site: Feladatsor adatai + csatolt fájl
+site->DB: Feladatsor adatai
+site->site: csatolt fájl tárolása a Storage mappában
+site->user: Átirányítás a kezdőlapra\n+\ntájékoztató üzenet a sikerességről
+
+@enduml
