@@ -6,10 +6,13 @@ control "Kréta API" as kreta
 database Adatbázis as DB
 
 user->site: felhasználónév\njelszó\nintézmény
+site->kreta: nonce lekérése
+kreta->site: nonce kód
+site->site: AuthorizationPolicy-Key generálása
 site->kreta: autentikációs kérés
-kreta->kreta: feldolgozás
-kreta->site: autentikációs válasz
-site->DB: kapott informciók tárolása adatbázisban
-
+kreta->kreta: adatfeldolgozás
+kreta->site: autentikációs válasz\nBearer token
+site->DB: adatbázis frissítése
+site->user: tovább léptetés Dashboard-ra
 
 @enduml
