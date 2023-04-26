@@ -3,17 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class SearchController extends Controller
 {
-    public static function search(): Collection
+    public static function search(): Factory|View|Application
     {
-        $request = request();
-        dd($request);
-        return File::query()
-            ->when($request->filled('topic'), function ($query) use ($request) {
-                $query->where('topic', 'like', '%'.$request->input('topic').'%');
-            })->get();
+        $title = request('title');
+        $subject = request('subject');
+        $topic = request('topic');
+
+        $query = File::query();
+
+        $query->when($title, function ($q) use ($title) {
+            return $q->where('title', 'LIKE', '%' . $title . '%');
+        });
+
+        $query->when($subject, function ($q) use ($subject) {
+            return $q->where('subject', 'LIKE', '%' . $subject . '%');
+        });
+
+        $query->when($topic, function ($q) use ($topic) {
+            return $q->where('topic', 'LIKE', '%' . $topic . '%');
+        });
+
+        $results = $query->get();
+
+        return view('search', compact('results'));
     }
 }
