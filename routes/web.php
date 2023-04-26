@@ -11,8 +11,8 @@ Route::get('/login', function () {
 });
 
 Route::get('/', function () {
-    $myfiles = FileController::getMyFiles(session()->get('active_user')->id);
-    return view('dashboard')->with('myfiles',$myfiles);
+    $myfiles = FileController::getMyFiles(user()->id);
+    return view('dashboard')->with('myfiles', $myfiles);
 })->name('home')->middleware('auth');
 
 
@@ -29,6 +29,22 @@ Route::post('/upload', 'App\Http\Controllers\FileController@store')
     ->name('files.store')
     ->middleware('auth');
 
+Route::post('/search', 'App\Http\Controllers\SearchController@search')
+    ->name('search')
+    ->middleware('auth');
+
 Route::post('/login', 'App\Http\Controllers\UserController@loginRequest')
     ->name('login');
 
+Route::get('/logout', function () {
+    session()->flush();
+    return redirect('/login');
+})->name('logout');
+
+Route::get('/download/{file_name}', 'App\Http\Controllers\FileController@downloadFile')
+    ->name('downloadFile')
+    ->middleware('auth');
+
+Route::get('/delete/{filename}', 'App\Http\Controllers\FileController@destroy')
+    ->name('deleteFile')
+    ->middleware('auth');
