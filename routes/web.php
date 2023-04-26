@@ -11,7 +11,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/', function () {
-    $myfiles = FileController::getMyFiles(session()->get('active_user')->id);
+    $myfiles = FileController::getMyFiles(user()->id);
     return view('dashboard')->with('myfiles', $myfiles);
 })->name('home')->middleware('auth');
 
@@ -41,3 +41,10 @@ Route::get('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
+Route::get('/download/{file_name}', 'App\Http\Controllers\FileController@downloadFile')
+    ->name('downloadFile')
+    ->middleware('auth');
+
+Route::get('/delete/{filename}', 'App\Http\Controllers\FileController@destroy')
+    ->name('deleteFile')
+    ->middleware('auth');
