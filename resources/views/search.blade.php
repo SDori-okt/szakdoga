@@ -38,19 +38,15 @@
             document.getElementById("megosztURL").value = "";
         }
     </script>
-
 </head>
 <body>
-<!-- Menu -->
+
 @include('menu')
 @include('alert')
 
-<!-- Upload -->
 <div class="container w-50 min-vh-100">
     <h2 class="fs-1 pt-5 pb-3">Keresés</h2>
 
-
-    <!-- Kereső -->
     <div class="bg-white p-3 shadow-md">
         <p>Az alábbi űrlapmezők kitöltésével szűkítheted a keresésed.</p>
         <form action="{{ route('search') }}"
@@ -138,7 +134,6 @@
         @endif
     @endif
 
-    <!-- Share pop-up -->
     <div id="share"
          class="invisible z-3 position-fixed bottom-50 w-50 h-25 shadow-lg
          d-flex gap-2 align-items-center justify-content-start p-1 flex-column bg-white rounded-1">
@@ -159,10 +154,7 @@
 
 </div>
 
-
-<!-- Footer -->
 @include("footer")
-
 
 </body>
 </html>
