@@ -47,7 +47,7 @@
 <div class="container w-50 min-vh-100">
     <h2 class="fs-1 pt-5 pb-3">Keresés</h2>
 
-    <div class="bg-white p-3 shadow-md">
+    <div class="bg-white p-3 shadow-md rounded">
         <p>Az alábbi űrlapmezők kitöltésével szűkítheted a keresésed.</p>
         <form action="{{ route('search') }}"
               method="post"
@@ -82,16 +82,34 @@
                 placeholder="Évfolyam"
                 name="grade"
             />
-            <span class="border-bottom">
-                <label for="nehezseg" class="w-25 text-center">Nehézségi szint</label>
+            <div class="border-bottom d-flex gap-1 align-items-center">
+                <label for="nehezseg" class="text-center ps-3">Nehézségi szint</label>
                 <input
                     type="number"
-                    min="1" max="3"
+                    min="1" max="5"
                     id="nehezseg"
-                    class="w-75 p-3 rounded-0"
+                    class="flex-fill p-3 rounded-0"
                     name="difficulty_level"
                 />
-            </span>
+            </div>
+
+            <div class="d-flex align-items-center border-bottom ">
+                <label for="type" class="ps-3">Típus:</label>
+                <select name="type" id="type" class="flex-fill fel mb-2 text-right p-3">
+                    @foreach($types as $type)
+                        <option value="{{$type->name}}">{{$type->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="d-flex align-items-center border-bottom ">
+                <span class="p-3">Megoldási idő (perc):</span>
+                <label for="min">Min:</label>
+                <input type="time" class="flex-fill p-3 text-center" value="5" id="mintime" name="min">
+                <label for="max">Max:</label>
+                <input type="time" class="flex-fill p-3 text-center" value="45" id="maxtime" name="max">
+            </div>
+
             <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info">
         </form>
     </div>

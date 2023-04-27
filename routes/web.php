@@ -22,7 +22,8 @@ Route::get('/upload', function () {
 })->middleware('auth');
 
 Route::get('/search', function () {
-    return view('search');
+    $types = TypeController::getAllTypes();
+    return view('search')->with('types', $types);
 })->middleware('auth');
 
 Route::post('/upload', 'App\Http\Controllers\FileController@store')
