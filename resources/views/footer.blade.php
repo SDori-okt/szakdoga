@@ -44,9 +44,9 @@
         <div>
             <span class="footer-title">Social</span>
             <div class="grid grid-flow-col gap-4">
-                <a href="https://facebook.com"><span class="fa fa-facebook"></span></a>
-                <a href="https://instagram.com"><span class="fa fa-instagram"></span></a>
-                <a href="https://twitter.com"><span class="fa fa-twitter"></span></a>
+                <a href="https://facebook.com" target="_blank"><span class="fa fa-facebook"></span></a>
+                <a href="https://instagram.com" target="_blank"><span class="fa fa-instagram"></span></a>
+                <a href="https://twitter.com" target="_blank"><span class="fa fa-twitter"></span></a>
             </div>
         </div>
     </div>
