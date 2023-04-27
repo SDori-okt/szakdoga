@@ -16,9 +16,6 @@
                     <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Kezdőlap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/profil') }}">Profil</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="{{ url('/search') }}">Keresés</a>
                 </li>
                 <li class="nav-item">
