@@ -96,7 +96,8 @@
             <div class="d-flex align-items-center border-bottom ">
                 <label for="type" class="ps-3">Típus:</label>
                 <select name="type" id="type" class="flex-fill fel mb-2 text-right p-3">
-                    @foreach($types as $type)
+                    <option>Válassza ki a feladatsor típusát!</option>
+                    @foreach(App\Http\Controllers\TypeController::getAllTypes() as $type)
                         <option value="{{$type->name}}">{{$type->name}}</option>
                     @endforeach
                 </select>
@@ -105,12 +106,12 @@
             <div class="d-flex align-items-center border-bottom ">
                 <span class="p-3">Megoldási idő (perc):</span>
                 <label for="min">Min:</label>
-                <input type="time" class="flex-fill p-3 text-center" value="5" id="mintime" name="min">
+                <input type="time" class="flex-fill p-3 text-center" value="5" id="mintime" name="min"/>
                 <label for="max">Max:</label>
-                <input type="time" class="flex-fill p-3 text-center" value="45" id="maxtime" name="max">
+                <input type="time" class="flex-fill p-3 text-center" value="45" id="maxtime" name="max"/>
             </div>
 
-            <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info">
+            <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info"/>
         </form>
     </div>
 
@@ -124,8 +125,10 @@
                     <tr>
                         <th>Fájlnév</th>
                         <th>Típus</th>
+                        <th>Évfolyam</th>
+                        <th>Nehézség</th>
                         <th>Szerző</th>
-                        <th>Utolsó megtekintés</th>
+                        <th>Foltöltve</th>
                         <th>Eszközök</th>
                     </tr>
                     </thead>
@@ -134,8 +137,14 @@
                         <tr>
                             <td class="text-center text-wrap">{{$result->title}}</td>
                             <td class="text-center">{{$result->type}}</td>
-                            <td class="text-center">{{$result->user_id}}</td>
-                            <td class="text-center">{{$result->created_at}}</td>
+                            <td class="text-center">{{$result->grade}}</td>
+                            <td class="text-center">{{$result->difficulty_level}}</td>
+                            <td class="text-center">
+                                {{\App\Models\User::query()
+                                    ->where('id','=', $result->user_id)
+                                    ->first()->full_name}}
+                            </td>
+                            <td class="text-center">{{$result->created_at->toDateString('Y-m-d')}}</td>
                             <td class="text-center">
                                 <span class="fa fa-download text-success cursor-pointer" title="Letöltés"></span>
                                 <span class="fa fa-share-alt text-primary cursor-pointer"
