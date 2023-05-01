@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <title>Kezdőlap - ShareOn - Fájlmegosztás tanároknak</title>
+    <title>Keresés - ShareOn - Fájlmegosztás tanároknak</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -123,12 +123,12 @@
                 <table class="table table-striped table-hover">
                     <thead class="text-center">
                     <tr>
-                        <th>Fájlnév</th>
+                        <th>Cím</th>
                         <th>Típus</th>
                         <th>Évfolyam</th>
                         <th>Nehézség</th>
                         <th>Szerző</th>
-                        <th>Foltöltve</th>
+                        <th>Feltöltve</th>
                         <th>Eszközök</th>
                     </tr>
                     </thead>
