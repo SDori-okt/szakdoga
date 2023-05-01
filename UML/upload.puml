@@ -6,7 +6,8 @@ database Adatbázis as DB
 
 user->site: Feladatsor adatai + csatolt fájl
 site->DB: Feladatsor adatai
-site->site: csatolt fájl tárolása a Storage mappában
+site->site: Csatolt fájl tárolása a Storage mappában
+site->DB: Felhasználó jutalom pontjainak jóváírása
 site->user: Átirányítás a kezdőlapra\n+\ntájékoztató üzenet a sikerességről
 
 @enduml

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <title>Kezdőlap - ShareOn - Fájlmegosztás tanároknak</title>
+    <title>Keresés - ShareOn - Fájlmegosztás tanároknak</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -19,39 +19,21 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom -->
+    <!-- Custom CSS-->
     <link rel="stylesheet" href="css/home.css">
 
-    <script>
-        const nope = () => {
-            document.getElementById("share").classList.add("invisible");
-        }
-
-        const share = (file, ext) => {
-            document.getElementById("share").classList.remove("invisible");
-            document.getElementById("megosztando").innerHTML = file + "." + ext;
-        }
-
-        const copy = () => {
-            let copyText = document.getElementById("megosztURL").value;
-            navigator.clipboard.writeText(copyText);
-            document.getElementById("megosztURL").value = "";
-        }
-    </script>
-
+    <!--Custom JS -->
+    <script src="js/share.js"></script>
 </head>
 <body>
-<!-- Menu -->
+
 @include('menu')
 @include('alert')
 
-<!-- Upload -->
 <div class="container w-50 min-vh-100">
     <h2 class="fs-1 pt-5 pb-3">Keresés</h2>
 
-
-    <!-- Kereső -->
-    <div class="bg-white p-3 shadow-md">
+    <div class="bg-white p-3 shadow-md rounded">
         <p>Az alábbi űrlapmezők kitöltésével szűkítheted a keresésed.</p>
         <form action="{{ route('search') }}"
               method="post"
@@ -86,17 +68,36 @@
                 placeholder="Évfolyam"
                 name="grade"
             />
-            <span class="border-bottom">
-                <label for="nehezseg" class="w-25 text-center">Nehézségi szint</label>
+            <div class="border-bottom d-flex gap-1 align-items-center">
+                <label for="nehezseg" class="text-center ps-3">Nehézségi szint</label>
                 <input
                     type="number"
-                    min="1" max="3"
+                    min="1" max="5"
                     id="nehezseg"
-                    class="w-75 p-3 rounded-0"
+                    class="flex-fill p-3 rounded-0"
                     name="difficulty_level"
                 />
-            </span>
-            <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info">
+            </div>
+
+            <div class="d-flex align-items-center border-bottom ">
+                <label for="type" class="ps-3">Típus:</label>
+                <select name="type" id="type" class="flex-fill fel mb-2 text-right p-3">
+                    <option>Válassza ki a feladatsor típusát!</option>
+                    @foreach(App\Http\Controllers\TypeController::getAllTypes() as $type)
+                        <option value="{{$type->name}}">{{$type->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="d-flex align-items-center border-bottom ">
+                <span class="p-3">Megoldási idő (perc):</span>
+                <label for="min">Min:</label>
+                <input type="time" class="flex-fill p-3 text-center" value="5" id="mintime" name="min"/>
+                <label for="max">Max:</label>
+                <input type="time" class="flex-fill p-3 text-center" value="45" id="maxtime" name="max"/>
+            </div>
+
+            <input type="submit" value="Keres" class="w-25 align-self-center p-3 btn btn-info"/>
         </form>
     </div>
 
@@ -108,10 +109,12 @@
                 <table class="table table-striped table-hover">
                     <thead class="text-center">
                     <tr>
-                        <th>Fájlnév</th>
+                        <th>Cím</th>
                         <th>Típus</th>
+                        <th>Évfolyam</th>
+                        <th>Nehézség</th>
                         <th>Szerző</th>
-                        <th>Utolsó megtekintés</th>
+                        <th>Feltöltve</th>
                         <th>Eszközök</th>
                     </tr>
                     </thead>
@@ -120,13 +123,31 @@
                         <tr>
                             <td class="text-center text-wrap">{{$result->title}}</td>
                             <td class="text-center">{{$result->type}}</td>
-                            <td class="text-center">{{$result->user_id}}</td>
-                            <td class="text-center">{{$result->created_at}}</td>
+                            <td class="text-center">{{$result->grade}}</td>
+                            <td class="text-center">{{$result->difficulty_level}}</td>
                             <td class="text-center">
-                                <span class="fa fa-download text-success cursor-pointer" title="Letöltés"></span>
-                                <span class="fa fa-share-alt text-primary cursor-pointer"
-                                      title="Megosztás" onclick="share('Mintafájl','PDF')">
-                            </span>
+                                {{\App\Models\User::query()
+                                    ->where('id','=', $result->user_id)
+                                    ->first()->full_name}}
+                            </td>
+                            <td class="text-center">{{$result->created_at->toDateString('Y-m-d')}}</td>
+                            <td class="text-center">
+                                <a href="{{ route('downloadFile', ['file_name' => $result->file_name]) }}">
+                                    <span
+                                        class="fa fa-download text-success cursor-pointer"
+                                        title="Letöltés">
+                                    </span>
+                                </a>
+                                <a
+                                    href="#"
+                                    onclick="copyToClipboard('{{ route('downloadFile',
+                                    ['file_name' => $result->file_name]) }}')"
+                                >
+                                    <span
+                                        class="fa fa-share-alt text-info cursor-pointer"
+                                        title="Megosztás">
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -138,7 +159,6 @@
         @endif
     @endif
 
-    <!-- Share pop-up -->
     <div id="share"
          class="invisible z-3 position-fixed bottom-50 w-50 h-25 shadow-lg
          d-flex gap-2 align-items-center justify-content-start p-1 flex-column bg-white rounded-1">
@@ -159,10 +179,7 @@
 
 </div>
 
-
-<!-- Footer -->
 @include("footer")
-
 
 </body>
 </html>

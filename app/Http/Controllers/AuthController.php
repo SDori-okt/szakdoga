@@ -19,8 +19,8 @@ class AuthController extends Controller
         $key = pack('c*', 98, 97, 83, 115, 120, 79, 119, 108, 85, 49, 106, 77);
         $nonce = self::getNonce();
         $message = strtoupper($institution) . $nonce . strtoupper($username);
-        $dig = hash_hmac('sha512', $message, $key, true);
-        $generated = base64_encode($dig);
+        $hash = hash_hmac('sha512', $message, $key, true);
+        $generated = base64_encode($hash);
         $headers = [
             'Content-Type: application/x-www-form-urlencoded; charset=utf-8',
             'User-Agent: hu.ekreta.student/1.0.5/Android/0/0',
