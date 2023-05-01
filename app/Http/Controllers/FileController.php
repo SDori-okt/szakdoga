@@ -39,9 +39,10 @@ class FileController extends Controller
             $file->title = $request->input('title');
             $file->subject = $request->input('subject');
             $file->topic = $request->input('topic');
+            $file->grade = $request->input('grade');
             $file->difficulty_level = $request->input('difficulty_level');
             $file->type = $request->input('type');
-            $file->time = $request->input('time');
+            $file->duration = $request->input('duration');
             $file->num_of_downloads = 0;
             $file->user_id = user()->id;
 

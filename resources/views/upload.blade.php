@@ -26,11 +26,9 @@
     <script src="js/upload.js"></script>
 </head>
 <body>
-<!-- Menu -->
 @include('menu')
 @include('alert')
 
-<!-- Upload -->
 <form method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="container w-50 min-vh-100">
@@ -54,6 +52,11 @@
         </div>
 
         <div class="d-flex">
+            <label for="subject">Évfolyam:</label>
+            <input class="flex-fill border-bottom fel mb-2 ml-2" type="number" name="grade" id="grade">
+        </div>
+
+        <div class="d-flex">
             <label for="type">Típus:</label>
             <select name="type" id="type" class="flex-fill border-bottom fel mb-2 text-right">
                 @foreach($types as $type)
@@ -64,7 +67,13 @@
 
         <div class="d-flex">
             <label for="time" class="form-label">Megoldásra szánt idő:</label>
-            <input type="time" name="time" id="time" value="15" class="flex-fill border-bottom fel mb-2 text-right">
+            <input
+                type="time"
+                name="duration"
+                id="duration"
+                value="15"
+                class="flex-fill border-bottom fel mb-2 text-right"
+            />
         </div>
 
         <div class="d-flex">
@@ -128,8 +137,6 @@
     </div>
 </form>
 
-
-<!-- Footer -->
 @include("footer")
 </body>
 </html>
