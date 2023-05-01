@@ -1,0 +1,14 @@
+@startuml
+
+actor Felhasználó as user
+participant ShareOn as site
+database Adatbázis as DB
+
+user->site: letöltési kérés fájlnév alapján
+site->site: bejelentkezés ellenőrzése
+site->DB: fájl adatainak lekérése
+DB->site: fájl adatai
+site->site: fájl letöltésére vonatkozó kritériumok ellenőrzése\npl.: saját fájl, vagy megfelelő pontszám\nfájl létezése
+site->user: fájl letöltése a felhasználó eszközére
+
+@enduml

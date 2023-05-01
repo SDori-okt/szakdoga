@@ -4,4 +4,5 @@ function copyToClipboard(path) {
     tempInput.val(path).select();
     document.execCommand('copy');
     tempInput.remove();
+    alert('Megosztási hivatkozás vágólapra másolva.');
 }
