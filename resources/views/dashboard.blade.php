@@ -26,36 +26,32 @@
     <script src="js/share.js"></script>
 </head>
 <body>
-<!-- Menu -->
 @include('menu')
 @include('alert')
 
-<!-- Dashboard tile -->
 <div class="container w-50">
     <h2 class="fs-1 pb-3 pt-5">Statisztikád</h2>
     <div class="container p-0 d-md-flex gap-10 justify-content-between">
         <div class="w-50 shadow-md p-5 rounded-3 bg-danger d-flex flex-column
             align-items-center justify-content-center">
             <h2>Letöltések</h2>
-            <p class="fs-1 fw-bold">44</p>
+            <p class="fs-1 fw-bold">4</p>
         </div>
         <div
             class="w-50 shadow-md p-5 rounded-3 bg-success d-flex flex-column
                 align-items-center justify-content-center">
             <h2>Feltöltések</h2>
-            <p class="fs-1 fw-bold">44</p>
+            <p class="fs-1 fw-bold">{{$myfiles->count()}}</p>
         </div>
         <div
             class="w-50 shadow-md p-5 rounded-3 bg-warning d-flex flex-column
                 align-items-center justify-content-center">
-            <h2>Értékelés</h2>
-            <p class="fs-1 fw-bold">4.4</p>
+            <h2>Pontszám</h2>
+            <p class="fs-1 fw-bold">{{user()->point}}</p>
         </div>
     </div>
 </div>
 
-
-<!-- Dashboard files -->
 <div class="container w-50 py-5">
     <h2 class="fs-1 pb-3">Legutóbbi fájljaid</h2>
     <table class="table table-striped table-hover">
@@ -63,7 +59,8 @@
         <tr>
             <th>Cím</th>
             <th>Típus</th>
-            <th>Szerző</th>
+            <th>Tantárgy</th>
+            <th>Évfolyam</th>
             <th>Feltöltve</th>
             <th>Eszközök</th>
         </tr>
@@ -79,7 +76,10 @@
                     {{$myfile->type}}
                 </td>
                 <td class="text-center">
-                    {{\App\Models\User::query()->where('id','=', $myfile->user_id)->first()->full_name}}
+                    {{$myfile->subject}}
+                </td>
+                <td class="text-center">
+                    {{$myfile->grade}}
                 </td>
                 <td class="text-center">
                     {{$myfile->created_at->toDateString('Y-m-d')}}
@@ -123,8 +123,6 @@
 
 </div>
 
-
-<!-- Footer -->
 @include("footer")
 </body>
 </html>
