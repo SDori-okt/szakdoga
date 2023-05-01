@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Download;
 use App\Models\Type;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -80,13 +81,26 @@ class FileController extends Controller
         }
 
         $file = File::query()->where('file_name', '=', $filename)->first();
-        if ($file->user_id != user()->id) {
+
+        $have = Download::query()
+            ->where('user_id', '=', user()->id)
+            ->where('file_id', '=', $file->id)
+            ->get()->count()!=0;
+
+        dd($have);
+
+        if ($file->user_id != user()->id || $have) {
             $type = Type::query()->where('name', '=', $file->type)->first();
             if (user()->point < $type->point_down) {
                 return redirect('home')->with('error', 'Nincs elég pontja a letöltéshez.');
             } else {
                 user()->point -= $type->point_down;
                 user()->save();
+
+                $download = new Download;
+                $download->user_id=user()->id;
+                $download->file_id=$file->id;
+                $download->save();
             }
         }
 

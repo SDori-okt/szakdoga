@@ -19,25 +19,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.2/dist/full.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Custom -->
+    <!-- Custom CSS-->
     <link rel="stylesheet" href="css/home.css">
 
-    <script>
-        const nope = () => {
-            document.getElementById("share").classList.add("invisible");
-        }
-
-        const share = (file, ext) => {
-            document.getElementById("share").classList.remove("invisible");
-            document.getElementById("megosztando").innerHTML = file + "." + ext;
-        }
-
-        const copy = () => {
-            let copyText = document.getElementById("megosztURL").value;
-            navigator.clipboard.writeText(copyText);
-            document.getElementById("megosztURL").value = "";
-        }
-    </script>
+    <!--Custom JS -->
+    <script src="js/share.js"></script>
 </head>
 <body>
 
@@ -146,10 +132,22 @@
                             </td>
                             <td class="text-center">{{$result->created_at->toDateString('Y-m-d')}}</td>
                             <td class="text-center">
-                                <span class="fa fa-download text-success cursor-pointer" title="Letöltés"></span>
-                                <span class="fa fa-share-alt text-primary cursor-pointer"
-                                      title="Megosztás" onclick="share('Mintafájl','PDF')">
-                            </span>
+                                <a href="{{ route('downloadFile', ['file_name' => $result->file_name]) }}">
+                                    <span
+                                        class="fa fa-download text-success cursor-pointer"
+                                        title="Letöltés">
+                                    </span>
+                                </a>
+                                <a
+                                    href="#"
+                                    onclick="copyToClipboard('{{ route('downloadFile',
+                                    ['file_name' => $result->file_name]) }}')"
+                                >
+                                    <span
+                                        class="fa fa-share-alt text-info cursor-pointer"
+                                        title="Megosztás">
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

@@ -87,13 +87,13 @@
                 <td class="text-center">
                     <a href="{{ route('downloadFile', ['file_name' => $myfile->file_name]) }}">
                         <span
-                            class="fa fa-arrow-down text-success"
+                            class="fa fa-download text-success cursor-pointer"
                             title="Letöltés">
                         </span>
                     </a>
                     <a href="{{ route('deleteFile', ['filename' => $myfile->file_name]) }}">
                         <span
-                            class="fa fa-times text-danger"
+                            class="fa fa-times text-danger cursor-pointer"
                             title="Törlés">
                         </span>
                     </a>
@@ -102,7 +102,7 @@
                         onclick="copyToClipboard('{{ route('downloadFile', ['file_name' => $myfile->file_name]) }}')"
                     >
                         <span
-                            class="fa fa-share-alt text-info"
+                            class="fa fa-share-alt text-info cursor-pointer"
                             title="Megosztás">
                         </span>
                     </a>
